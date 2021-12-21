@@ -14,7 +14,6 @@ import javax.script.ScriptEngineManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    double input1 = 0, input2 = 0;
     TextView text1,text2;
     Button button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonAdd, buttonSub,
             buttonMul, buttonDivision, buttonEqual, buttonDel, buttonDot, Remainder,buttonBackspace;
@@ -309,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }catch(Exception e){
                         text1.setText(text2.getText());
-                        text2.setText("Math error!");
+                        text2.setText("");
                     }
                 }
             }
