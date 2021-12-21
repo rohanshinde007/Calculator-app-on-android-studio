@@ -2,22 +2,31 @@ package com.mul.calculation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.Locale;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     TextView text1,text2;
     Button button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonAdd, buttonSub,
             buttonMul, buttonDivision, buttonEqual, buttonDel, buttonDot, Remainder,buttonBackspace;
     String calculate="";
+    TextToSpeech textToSpeech;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +55,17 @@ public class MainActivity extends AppCompatActivity {
         text1 = (TextView) findViewById(R.id.output);
         text2 = (TextView) findViewById(R.id.outpute);
 
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+
+                // if No error is found then only it will run
+                if(i!=TextToSpeech.ERROR){
+                    // To Choose language of speech
+                    textToSpeech.setLanguage(Locale.US);
+                }
+            }
+        });
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     text2.setText(text2.getText()+"9");
                     calculate=calculate+"9";
+
                 }
             }
         });
@@ -171,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 text1.setText("");
                 text2.setText("");
                 calculate="";
+                textToSpeech.speak("Delete",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -194,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
                 }else if(text2.getText()==""){
 
                 }
+                textToSpeech.speak("back",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -218,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
                     calculate=calculate+"/";
                     text2.setText(text2.getText()+"/");
                 }
+                textToSpeech.speak("Divide by",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -232,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
                     calculate=calculate+"%";
                     text2.setText(text2.getText()+"%");
                 }
+                textToSpeech.speak("reminder",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -247,6 +272,7 @@ public class MainActivity extends AppCompatActivity {
                     calculate=calculate+"*";
                     text2.setText(text2.getText()+"X");
                 }
+                textToSpeech.speak("multiply",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -264,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
                     calculate=calculate+"-";
                     text2.setText(text2.getText()+"-");
                 }
+                textToSpeech.speak("minus",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -279,6 +306,7 @@ public class MainActivity extends AppCompatActivity {
                     calculate=calculate+"+";
                     text2.setText(text2.getText()+"+");
                 }
+                textToSpeech.speak("plus",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -288,30 +316,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
-                if(calculate!=""){
-                    try{
-                        if(text2.getText().toString().contains("^")){
-                            calculate=calculate+")";
+                if(calculate!="") {
+                    try {
+                        if (text2.getText().toString().contains("^")) {
+                            calculate = calculate + ")";
                         }
-                        Log.d("calculation",calculate);
-                        Double result=(Double)engine.eval(calculate);
-                        Log.d("result",result.toString());
-                        if(result%1==0) {
-                            String a=String.format("%.0f", result);
+                        Double result = (Double) engine.eval(calculate);
+                        if (result % 1 == 0) {
+                            String a = String.format("%.0f", result);
                             text1.setText(text2.getText());
                             text2.setText(a);
-                            Log.d("intcheck","yes");
-                        }else{
+
+                            textToSpeech.speak("the answer is " + text2.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                        } else {
                             text1.setText(text2.getText());
                             text2.setText(result.toString());
-                            Log.d("intcheck","no");
+                            textToSpeech.speak("the answer is " + text2.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                         }
-                    }catch(Exception e){
+
+                    } catch (Exception e) {
                         text1.setText(text2.getText());
                         text2.setText("");
+                        textToSpeech.speak("sir please try valid calculation", TextToSpeech.QUEUE_FLUSH, null);
+
                     }
+
                 }
+
             }
         });
     }
-}
+
+    }
+
