@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Calculation">
-        <activity android:name=".EMI_calculator"
+        <activity android:name=".MoreApps"
             android:parentActivityName=".MainActivity"></activity>
+
+
         <activity android:name=".calculated" />
         <activity android:name=".MainActivity">
             <intent-filter>

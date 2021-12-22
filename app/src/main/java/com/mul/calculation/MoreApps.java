@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class EMI_calculator extends AppCompatActivity {
+public class MoreApps extends AppCompatActivity {
 TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emi_calculator);
+        setContentView(R.layout.activity_more_apps);
         textView = (TextView) findViewById(R.id.textView2);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,7 +22,6 @@ TextView textView;
                 startActivity(browserIntent);
             }
         });
-
 
     }
 }

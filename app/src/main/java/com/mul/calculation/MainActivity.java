@@ -382,7 +382,7 @@ db  = new DatabaseHandler(this);
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case  R.id.item1:
-       Intent i  = new Intent(MainActivity.this,EMI_calculator.class);
+       Intent i  = new Intent(MainActivity.this,MoreApps.class);
          startActivity(i);
         }
         return super.onOptionsItemSelected(item);
