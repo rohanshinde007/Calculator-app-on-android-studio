@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EMI_calculator">
+   android:background="@drawable/background">
 
     <TextView
         android:id="@+id/textView"
@@ -26,8 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
         android:layout_marginTop="45dp"
-        android:padding="5dp"
-        android:text="1 Torch light app include motion sensors"
+        android:padding="15dp"
+        android:background="@drawable/bk"
+        android:text="1: Torch light app include motion sensors"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
