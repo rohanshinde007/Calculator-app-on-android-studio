@@ -17,14 +17,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.Locale;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 import static java.security.AccessController.getContext;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity  {
     String calculate="";
     DatabaseHandler db;
     TextToSpeech textToSpeech;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-db  = new DatabaseHandler(this);
+
         button0 = (Button) findViewById(R.id.button0);
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
@@ -215,7 +214,6 @@ db  = new DatabaseHandler(this);
                 text2.setText("");
                 calculate="";
                 textToSpeech.speak("Delete",TextToSpeech.QUEUE_FLUSH,null);
-                boolean b=db.insertData(text1.getText().toString()+" = "+text2.getText().toString());
             }
         });
 
@@ -340,6 +338,7 @@ db  = new DatabaseHandler(this);
             public void onClick(View view) {
                 ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
                 if(calculate!="") {
+
                     try {
                         if (text2.getText().toString().contains("^")) {
                             calculate = calculate + ")";
@@ -351,26 +350,36 @@ db  = new DatabaseHandler(this);
                             text2.setText(a);
 
                             textToSpeech.speak("the answer is " + text2.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+
+
                         } else {
                             text1.setText(text2.getText());
                             text2.setText(result.toString());
                             textToSpeech.speak("the answer is " + text2.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+
                         }
-
-
+                        String text = text1.getText().toString()+" = "+text2.getText().toString();
+                        db  = new DatabaseHandler(MainActivity.this);
+                        boolean sucess = db.insertData(text);
+                        if (sucess == true){
+                            Toast.makeText(MainActivity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(MainActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (Exception e) {
                         text1.setText(text2.getText());
                         text2.setText("");
                         textToSpeech.speak("sir please try valid calculation", TextToSpeech.QUEUE_FLUSH, null);
                     }
-                    adddata();
+
+
+
                 }
 
             }
         });
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -387,10 +396,5 @@ db  = new DatabaseHandler(this);
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void adddata(){
-        boolean b=db.insertData(text1.getText().toString()+" = "+text2.getText().toString());
-    }
-
     }
 

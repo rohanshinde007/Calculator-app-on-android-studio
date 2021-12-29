@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,8 +19,8 @@ public class calculated extends AppCompatActivity {
 ListView list;
 DatabaseHandler db;
 int i = 0;
-String history[]=new String[500];
-String history1[] = new String[500];
+String history[]=new String[5000];
+String history1[] = new String[5000];
 Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,8 @@ Button button;
         setContentView(R.layout.activity_calculated);
 
         list = (ListView) findViewById(R.id.listView);
-        ArrayList listData = new ArrayList<>();
 
-       db = new DatabaseHandler(this);
+       db = new DatabaseHandler( calculated.this);
         //  db = new DatabaseHandler(this);
         button = (Button) findViewById(R.id.button);
 
@@ -40,12 +41,18 @@ Button button;
             }
         });
         Cursor res = db.getData();
+        if (res.getCount()==0){
+            Toast.makeText(this, "res sucess", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "res falure", Toast.LENGTH_SHORT).show();
+        }
+        StringBuffer bu = new StringBuffer();
         while(res.moveToNext()){
-           listData.add(res.getString(1));
+            bu.append("col_1:"+res.getString(1)+"\n");
             history[i] = res.getString(1);
             i++;
         }
-        for ( int i=0;i<500;i++)
+        for ( int i=0;i<5000;i++)
             history1[i] = "";
 
         if (i!=0){
