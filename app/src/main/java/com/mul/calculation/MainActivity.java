@@ -237,7 +237,6 @@ public class MainActivity extends AppCompatActivity  {
                 }else if(text2.getText()==""){
 
                 }
-                textToSpeech.speak("back",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -262,7 +261,6 @@ public class MainActivity extends AppCompatActivity  {
                     calculate=calculate+"/";
                     text2.setText(text2.getText()+"/");
                 }
-                textToSpeech.speak("Divide by",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -277,7 +275,6 @@ public class MainActivity extends AppCompatActivity  {
                     calculate=calculate+"%";
                     text2.setText(text2.getText()+"%");
                 }
-                textToSpeech.speak("reminder",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -293,7 +290,6 @@ public class MainActivity extends AppCompatActivity  {
                     calculate=calculate+"*";
                     text2.setText(text2.getText()+"X");
                 }
-                textToSpeech.speak("multiply",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -311,7 +307,6 @@ public class MainActivity extends AppCompatActivity  {
                     calculate=calculate+"-";
                     text2.setText(text2.getText()+"-");
                 }
-                textToSpeech.speak("minus",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -327,7 +322,6 @@ public class MainActivity extends AppCompatActivity  {
                     calculate=calculate+"+";
                     text2.setText(text2.getText()+"+");
                 }
-                textToSpeech.speak("plus",TextToSpeech.QUEUE_FLUSH,null);
             }
         });
 
@@ -361,19 +355,11 @@ public class MainActivity extends AppCompatActivity  {
                         String text = text1.getText().toString()+" = "+text2.getText().toString();
                         db  = new DatabaseHandler(MainActivity.this);
                         boolean sucess = db.insertData(text);
-                        if (sucess == true){
-                            Toast.makeText(MainActivity.this, "Sucess", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(MainActivity.this, "failed", Toast.LENGTH_SHORT).show();
-                        }
                     } catch (Exception e) {
                         text1.setText(text2.getText());
                         text2.setText("");
                         textToSpeech.speak("sir please try valid calculation", TextToSpeech.QUEUE_FLUSH, null);
                     }
-
-
-
                 }
 
             }

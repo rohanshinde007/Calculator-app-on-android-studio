@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 public class MoreApps extends AppCompatActivity {
 TextView textView;
+TextToSpeech textToSpeech;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +27,9 @@ TextView textView;
                 startActivity(browserIntent);
             }
         });
-
+        CheckBox c = (CheckBox) findViewById(R.id.checkBox);
+    if (c.isChecked()){
+        textToSpeech.stop();
+    }
     }
 }

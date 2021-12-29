@@ -41,14 +41,9 @@ Button button;
             }
         });
         Cursor res = db.getData();
-        if (res.getCount()==0){
-            Toast.makeText(this, "res sucess", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "res falure", Toast.LENGTH_SHORT).show();
-        }
-        StringBuffer bu = new StringBuffer();
+        //StringBuffer bu = new StringBuffer();
         while(res.moveToNext()){
-            bu.append("col_1:"+res.getString(1)+"\n");
+           // bu.append("col_1:"+res.getString(1)+"\n");
             history[i] = res.getString(1);
             i++;
         }
