@@ -27,9 +27,7 @@ TextToSpeech textToSpeech;
                 startActivity(browserIntent);
             }
         });
-        CheckBox c = (CheckBox) findViewById(R.id.checkBox);
-    if (c.isChecked()){
-        textToSpeech.stop();
-    }
+
+
     }
 }
