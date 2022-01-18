@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import static android.os.Build.ID;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-    public static final int  DATABASE_VERSION = 3;
+    public static final int  DATABASE_VERSION = 5;
     public static final  String DATABASE_NAME = "Database.db";
     public static final String col_1 = "ID";
     public static final String col_name1 = "CALCULATION";

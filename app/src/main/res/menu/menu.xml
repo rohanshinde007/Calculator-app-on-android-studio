@@ -7,7 +7,6 @@
         <item android:title="More apps"
             android:id="@+id/item1"
             app:showAsAction="never"/>
-
     </group>
 
 </menu>

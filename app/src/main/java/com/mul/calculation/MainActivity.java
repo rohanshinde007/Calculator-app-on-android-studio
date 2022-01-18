@@ -14,6 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity  {
     String calculate="";
     DatabaseHandler db;
     TextToSpeech textToSpeech;
+    HorizontalScrollView hzw;
+    boolean ischeval;
+    CheckBox ch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,22 +65,7 @@ public class MainActivity extends AppCompatActivity  {
         buttonEqual = (Button) findViewById(R.id.equals);
         buttonBackspace = (Button)findViewById(R.id.backspace);
 
-        db=new DatabaseHandler(this);
-        history = (Button) findViewById(R.id.history);
-      history.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
 
-              Intent a = new Intent(MainActivity.this,calculated.class);
-              startActivity(a);
-          }
-      });
-
-
-
-
-        text1 = (TextView) findViewById(R.id.output);
-        text2 = (TextView) findViewById(R.id.outpute);
 
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -87,123 +78,145 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         });
+
+        ch = (CheckBox) findViewById(R.id.ch);
+       ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if (ch.isChecked()){
+                   textToSpeech.shutdown();
+               }else {
+                   textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+                       @Override
+                       public void onInit(int i) {
+
+                           // if No error is found then only it will run
+                           if(i!=TextToSpeech.ERROR){
+                               // To Choose language of speech
+                               textToSpeech.setLanguage(Locale.US);
+                           }
+                       }
+                   });
+               }
+           }
+       });
+
+        db=new DatabaseHandler(this);
+        history = (Button) findViewById(R.id.history);
+      history.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+
+              Intent a = new Intent(MainActivity.this,calculated.class);
+              startActivity(a);
+          }
+      });
+
+
+hzw =(HorizontalScrollView) findViewById(R.id.hzw);
+hzw.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        hzw.post(new Runnable() {
+            @Override
+            public void run() {
+                hzw.fullScroll(View.FOCUS_RIGHT);
+            }
+        });
+    }
+});
+        text1 = (TextView) findViewById(R.id.output);
+
+        text2 = (TextView) findViewById(R.id.outpute);
+
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
                     text2.setText(text2.getText()+"0");
                     calculate=calculate+"0";
-                }
             }
         });
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
                     text2.setText(text2.getText()+"1");
                     calculate=calculate+"1";
-                }
+
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
                     text2.setText(text2.getText()+"2");
                     calculate=calculate+"2";
-                }
+
             }
         });
 
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
                     text2.setText(text2.getText()+"3");
                     calculate=calculate+"3";
-                }
+
             }
         });
 
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
+
                     text2.setText(text2.getText()+"4");
                     calculate=calculate+"4";
-                }
             }
         });
 
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
+
                     text2.setText(text2.getText()+"5");
                     calculate=calculate+"5";
-                }
+
             }
         });
 
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
+
                     text2.setText(text2.getText()+"6");
                     calculate=calculate+"6";
-                }
             }
         });
 
         button7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
+
                     text2.setText(text2.getText()+"7");
                     calculate=calculate+"7";
-                }
             }
         });
         button8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
+
                     text2.setText(text2.getText()+"8");
                     calculate=calculate+"8";
-                }
+
             }
         });
 
         button9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(text2.getText().length()>32){
-                    Toast.makeText(MainActivity.this, "Number too long", Toast.LENGTH_SHORT).show();
-                }else{
+
                     text2.setText(text2.getText()+"9");
                     calculate=calculate+"9";
 
-                }
             }
         });
 
@@ -222,25 +235,18 @@ public class MainActivity extends AppCompatActivity  {
         buttonBackspace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                if(text2.getText()!=""){
-                    if(text2.getText().charAt(text2.getText().length()-1)>='1' && text2.getText().charAt(text2.getText().length()-1)<='9') {
-                        if(text2.getText().length()>=1){
-                            text2.setText(text2.getText().toString().substring(0, text2.getText().length() - 1));
-                            calculate=calculate.substring(0,calculate.length()-1);
-                        }else{
-                            text2.setText("");
-                        }
-                    }else if(text2.getText().charAt(text2.getText().length()-1)=='('){
-                        text2.setText(text2.getText().toString().substring(0, text2.getText().length() - 4));
-                        calculate=calculate.substring(0,calculate.length()-4);
-                    }
-                }else if(text2.getText()==""){
+
+
+                String r =text2.getText().toString();
+                if (r.length()>1){
+                    r = r.substring(0,r.length()-1);
+                    text2.setText(r);
+                }else  if (r.length()<=1){
+                    text2.setText("");
 
                 }
             }
         });
-
-
 
         buttonDot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -365,6 +371,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -382,5 +389,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         return super.onOptionsItemSelected(item);
     }
-    }
+
+
+}
 

@@ -9,6 +9,8 @@ import android.renderscript.Sampler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ int i = 0;
 String history[]=new String[5000];
 String history1[] = new String[5000];
 Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

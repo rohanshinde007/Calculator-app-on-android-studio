@@ -27,7 +27,5 @@ TextToSpeech textToSpeech;
                 startActivity(browserIntent);
             }
         });
-
-
     }
 }

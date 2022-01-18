@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/android studio  project/Calculation/app/src/main/res/drawable/background.xml" value="0.1" />
+        <entry key="..\:/android studio  project/Calculation/app/src/main/res/drawable/bk.xml" value="0.1" />
+        <entry key="..\:/android studio  project/Calculation/app/src/main/res/drawable/button.xml" value="0.1" />
         <entry key="..\:/android studio  project/Calculation/app/src/main/res/drawable/hex.xml" value="0.1" />
-        <entry key="..\:/android studio  project/Calculation/app/src/main/res/layout/activity_calculated.xml" value="0.11927083333333334" />
+        <entry key="..\:/android studio  project/Calculation/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/android studio  project/Calculation/app/src/main/res/layout/activity_calculated.xml" value="0.264" />
+        <entry key="..\:/android studio  project/Calculation/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/android studio  project/Calculation/app/src/main/res/layout/activity_more_apps.xml" value="0.176" />
+        <entry key="..\:/android studio  project/Calculation/app/src/main/res/menu/menu.xml" value="0.23645833333333333" />
       </map>
     </option>
   </component>
